@@ -43,10 +43,13 @@ public class Lexer {
 	public Token scan() throws IOException {
 		// 去掉空字符
 		for ( ; ; readch()) {
-			if (peek == ' ' || peek == '\t') continue;
+			//if (peek == ' ' || peek == '\t') continue;
+			if (peek < 33 || peek > 126) continue;
 			else if (peek == '\n') line = line + 1;
 			else break;
 		}
+		//System.out.println((int)peek);
+		//System.out.println(peek + " is special sign?");
 		// 特殊符号的情况
 		switch (peek) {
 		case '&':
@@ -68,6 +71,7 @@ public class Lexer {
 			if (readch('=')) return Word.Ge;
 			else return new Token('>');
 		}
+		//System.out.println(peek + " is a digit?");
 		// 数字
 		if (Character.isDigit(peek)) {
 			int v = 0;
@@ -86,6 +90,7 @@ public class Lexer {
 			}
 			return new Real(x);// 浮点数
 		}
+		//System.out.println(peek + " is a word?");
 		// 单词
 		if (Character.isLetter(peek)) {
 			StringBuffer b = new StringBuffer();
@@ -95,11 +100,14 @@ public class Lexer {
 			} while (Character.isLetterOrDigit(peek));
 			String s = b.toString();
 			Word w = (Word)words.get(s);
+			//System.out.println("find a word "+s);
 			if (w != null) return w;
+			//System.out.println(s + " is a new word");
 			w = new Word(s, Tag.ID);
 			words.put(s, w);
 			return w;
 		}
+		//System.out.println(peek + " is WTF?");
 		// 其它神奇的字符
 		Token tok = new Token(peek);
 		peek = ' ';

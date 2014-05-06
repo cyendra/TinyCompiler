@@ -9,6 +9,9 @@ public class Word extends Token {
 		super(tag);
 		lexeme = s;
 	}
+	public String toString() {
+		return lexeme;
+	}
 	public static final Word
 		And = new Word("&&", Tag.AND), Or = new Word("||", Tag.OR),
 		Eq  = new Word("==", Tag.EQ),  Ne = new Word("!=", Tag.NE),

@@ -46,6 +46,7 @@ public class Parser {
 	}
 	void move() throws IOException {
 		look = lex.scan();
+		System.out.println(look.tag);
 	}
 	void error(String s) {
 		throw new Error("near line " + Lexer.line + ": " + s);
@@ -73,11 +74,14 @@ public class Parser {
 		return s;
 	}
 	void decls() throws IOException {
+		//System.out.println("Tag = "+look.tag);
 		while (look.tag == Tag.BASIC) {
+			//System.out.println("Tag = "+look.tag);
 			Type p = type();
 			Token tok = look;
 			match(Tag.ID);
 			match(';');
+			//System.out.println("id = "+((Word)tok).lexeme);
 			Id id = new Id((Word)tok, p, used);
 			top.put(tok, id);
 			used = used + p.width;
@@ -160,6 +164,7 @@ public class Parser {
 		Token t = look;
 		match(Tag.ID);
 		Id id = top.get(t);
+		System.out.println("---------\n a value = "+t.toString());
 		if (id == null) error(t.toString() + " undeclared");
 		if (look.tag == '=') {
 			move();
