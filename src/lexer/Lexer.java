@@ -42,9 +42,11 @@ public class Lexer {
 	}
 	public Token scan() throws IOException {
 		// 去掉空字符
+		//System.out.println("out = "+(int)'\n');
 		for ( ; ; readch()) {
-			//if (peek == ' ' || peek == '\t') continue;
-			if (peek < 33 || peek > 126) continue;
+			//System.out.println("get = "+(int)peek);
+			if (peek == ' ' || peek == '\t' || peek == '\r') continue;
+			//if (peek < 33 || peek > 126) continue;
 			else if (peek == '\n') line = line + 1;
 			else break;
 		}

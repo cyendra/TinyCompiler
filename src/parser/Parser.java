@@ -46,7 +46,7 @@ public class Parser {
 	}
 	void move() throws IOException {
 		look = lex.scan();
-		System.out.println(look.tag);
+		//System.out.println(look.tag);
 	}
 	void error(String s) {
 		throw new Error("near line " + Lexer.line + ": " + s);
@@ -114,13 +114,17 @@ public class Parser {
 			move();
 			return Stmt.Null;
 		case Tag.IF:
+			//System.out.println("找到if语句");
 			match(Tag.IF);
+			//System.out.println("准备匹配左括号");
 			match('(');
 			x = bool();
+			//System.out.println("准备匹配右括号");
 			match(')');
 			s1 = stmt();
+			//System.out.println("寻找else语句");
 			if (look.tag != Tag.ELSE) return new If(x, s1);
-			match(Tag.FALSE);
+			match(Tag.ELSE);
 			s2 = stmt();
 			return new Else(x, s1, s2);
 		case Tag.WHILE:
@@ -164,7 +168,7 @@ public class Parser {
 		Token t = look;
 		match(Tag.ID);
 		Id id = top.get(t);
-		System.out.println("---------\n a value = "+t.toString());
+		//System.out.println("---------\n a value = "+t.toString());
 		if (id == null) error(t.toString() + " undeclared");
 		if (look.tag == '=') {
 			move();
