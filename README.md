@@ -12,23 +12,26 @@ package main
   
 package lexer  
 ------------
-词法分析器。  
+词法分析器。的  
   
 **class Tag**  
-定义了各个词法单元对应的常量。  
+定义了各个词法单元对应的常量   
   
 **class Token**  
+词素  
   
 **class Num < Token**  
+管理整数的词素  
   
 **class Word < Token**  
-管理保留字、标识符和像&&这样的复合词法单元的词素。  
+管理保留字、标识符和像&&这样的复合词法单元的词素  
   
 **class Real < Token**  
-处理浮点数。  
+管理浮点数的词素  
   
 **class Lexer**  
-识别数字、标识符和保留字。  
+词法分析器
+用以识别数字、标识符和保留字  
   
 package symbols  
 ---------------
