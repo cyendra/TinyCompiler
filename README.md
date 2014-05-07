@@ -1,4 +1,4 @@
-Tiny Compiler
+﻿Tiny Compiler
 ============
 
 Tiny Compiler
@@ -40,10 +40,10 @@ package symbols
 **Env**  
 把字符串词法单元映射为类Id的对象
   
-**Type**  
+**Type < Word**  
 用词法分析器将基本类型从词素映射为适当的对象  
   
-**Array**  
+**Array < Type**  
 数组  
   
 package inter
